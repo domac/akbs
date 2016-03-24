@@ -2,11 +2,16 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/phillihq/akbs/core"
 	"github.com/phillihq/akbs/middleware"
 	"net/http"
+	"runtime"
 )
 
 func main() {
+
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
 	r := gin.Default()
 
 	//设置中间件
@@ -16,5 +21,9 @@ func main() {
 		c.String(http.StatusOK, "power by Gin")
 	})
 
-	r.Run(":8080")
+	go r.Run(":8080")
+
+	//信号处理
+	signalCH := core.InitSignal()
+	core.HandleSignal(signalCH)
 }
