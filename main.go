@@ -14,17 +14,27 @@ var debug = flag.Bool("debug", false, "set debug mode")
 //定义端口
 var port = flag.String("port", "8080", "the server port")
 
+var configFile = *flag.String("config", "./config/config.yaml", "the config file")
+
 func main() {
 
 	flag.Parse()
+
+	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	if *debug {
 		//开启debug模式
 		logger.GetLogger().Infoln("开启debug模式")
 		gin.SetMode(gin.DebugMode)
 	}
+	conf, err := core.ParseConfigFile(configFile)
 
-	runtime.GOMAXPROCS(runtime.NumCPU())
+	if err != nil {
+		panic("config file not found")
+	}
+
+	//设置配置信息
+	core.SetConfig(conf)
 
 	r := gin.New()
 

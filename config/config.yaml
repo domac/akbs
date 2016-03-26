@@ -1,0 +1,10 @@
+redis:
+    addrs : 192.168.139.139:6699
+    iscluster : true
+
+mysql:
+    host: 192.168.139.139
+    port: 3306
+    user: test
+    password: abc123
+    database: akbsdb
