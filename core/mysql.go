@@ -29,7 +29,7 @@ type Session struct {
 }
 
 func openConnection() *Session {
-	db, _ := sql.Open("mysql", "mydb@/akbs")
+	db, _ := sql.Open("mysql", "user:password@tcp(localhost:3306)/dbname?tls=skip-verify&autocommit=true")
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{Engine: "InnoDB", Encoding: "UTF8"}}
 	return &Session{Map: dbmap}
 }

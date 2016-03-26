@@ -2,7 +2,9 @@ package core
 
 import (
 	"errors"
+	"github.com/phillihq/akbs/logger"
 	"gopkg.in/redis.v3"
+	"time"
 )
 
 type MyRedisClient struct {
@@ -22,11 +24,13 @@ func NewMyRedisClient(isCluster bool) *MyRedisClient {
 
 	if !isCluster {
 		redisClient = redis.NewClient(&redis.Options{
-			Addr: "192.168.139.139:6699",
+			Addr:        "192.168.139.139:6699",
+			DialTimeout: 2 * time.Second,
 		})
 	} else {
 		clusterClient = redis.NewClusterClient(&redis.ClusterOptions{
-			Addrs: []string{"192.168.139.139:6699"},
+			Addrs:       []string{"192.168.139.139:6699"},
+			DialTimeout: 2 * time.Second,
 		})
 	}
 	return &MyRedisClient{
@@ -50,6 +54,7 @@ func (r *MyRedisClient) GetConn() (*redis.Client, error) {
 
 	err := r.redisClient.Ping().Err()
 	if err != nil {
+		logger.GetLogger().Errorln(err)
 		return nil, err
 	}
 	return r.redisClient, nil
@@ -62,6 +67,7 @@ func (r *MyRedisClient) GetClusterConn() (*redis.ClusterClient, error) {
 
 	err := r.clusterClient.Ping().Err()
 	if err != nil {
+		logger.GetLogger().Errorln(err)
 		return nil, err
 	}
 	return r.clusterClient, nil
