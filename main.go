@@ -9,12 +9,11 @@ import (
 	"runtime"
 )
 
-var debug = flag.Bool("debug", false, "set debug mode")
-
-//定义端口
-var port = *flag.String("port", "8080", "the server port")
-
-var configFile = *flag.String("config", "./config/config.yaml", "the config file")
+var (
+	debug      = flag.Bool("debug", false, "set debug mode")
+	port       = *flag.String("port", "8080", "the server port")
+	configFile = *flag.String("config", "./config/config.yaml", "the config file")
+)
 
 func main() {
 

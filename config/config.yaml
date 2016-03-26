@@ -3,8 +3,8 @@ redis:
     iscluster : true
 
 mysql:
-    host: 192.168.139.139
+    host: 127.0.0.1
     port: 3306
-    user: test
-    password: abc123
-    database: akbsdb
+    user: sa
+    password: 123456
+    database: antelope
