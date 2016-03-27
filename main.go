@@ -25,6 +25,8 @@ func main() {
 		//开启debug模式
 		logger.GetLogger().Infoln("开启debug模式")
 		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
 	}
 	conf, err := core.ParseConfigFile(configFile)
 
