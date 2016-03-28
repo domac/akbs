@@ -1,32 +1,20 @@
 package core
 
 import (
+	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
-	"github.com/phillihq/akbs/logger"
 	"net/http"
-	"strconv"
 )
 
 func RegisterRoutes(r *gin.Engine) {
 	r.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "power by Gin")
+	})
 
-		client := NewMyRedisClient(false)
-		conn, err := client.GetConn()
-
-		//defer conn.Close()
-
-		fc := conn.PoolStats().FreeConns
-
-		logger.GetLogger().Infof("fc : %s", strconv.Itoa(int(fc)))
-		logger.GetLogger().Infoln(strconv.Itoa(int(conn.PoolStats().Waits)))
-
-		if err != nil {
-			c.String(http.StatusBadRequest, "connect to redis fail")
-			return
-		}
-
-		value := conn.Get("name").String()
-
-		c.String(http.StatusOK, "power by Gin", value)
+	//测试redigo
+	r.GET("/redigo", func(c *gin.Context) {
+		rc, _ := OpenRedis("tcp", "192.168.139.139:6699", "")
+		val, _ := redis.String(rc.Get().Do("GET", "name"))
+		c.String(http.StatusOK, "power by Redigo:"+val)
 	})
 }
