@@ -26,11 +26,15 @@ func NewMyRedisClient(isCluster bool) *MyRedisClient {
 		redisClient = redis.NewClient(&redis.Options{
 			Addr:        "192.168.139.139:6699",
 			DialTimeout: 2 * time.Second,
+			PoolSize:    10,
+			PoolTimeout: time.Second * 5,
 		})
 	} else {
 		clusterClient = redis.NewClusterClient(&redis.ClusterOptions{
 			Addrs:       []string{"192.168.139.139:6699"},
 			DialTimeout: 2 * time.Second,
+			PoolSize:    10,
+			PoolTimeout: time.Second * 5,
 		})
 	}
 	return &MyRedisClient{
