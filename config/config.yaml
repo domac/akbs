@@ -1,6 +1,17 @@
 redis:
-    addrs : 192.168.139.139:6699
-    iscluster : true
+    addrs : 192.168.139.141:6699
+    max_idle : 3
+    idle_timeout : 240
+    
+redis_cluster:
+    addrs : 192.168.139.141:7000
+    keep_alive : 16
+    alive_time : 60
+    conn_timeout : 50
+    read_timeout : 50
+    write_timeout : 50
+    
+iscluster : false
 
 mysql:
     host: 127.0.0.1

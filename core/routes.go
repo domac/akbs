@@ -11,36 +11,17 @@ func RegisterRoutes(r *gin.Engine) {
 		c.String(http.StatusOK, "power by Gin")
 	})
 
-	//测试redigo
-	r.GET("/redigo", func(c *gin.Context) {
-		rc, err := OpenRedis("tcp", "192.168.139.139:7000", "")
-
+	r.GET("/cache", func(c *gin.Context) {
+		query := c.Query("query")
+		cache, err := NewRedisCache()
 		if err != nil {
-			c.String(http.StatusOK, "power by Redigo err:"+err.Error())
+			c.String(http.StatusOK, "power by Redigo cache err:"+err.Error())
+		}
+		val, err := redis.String(cache.Do("GET", query))
+		if err != nil {
+			c.String(http.StatusOK, "power by Redigo cache get err:"+err.Error())
 		}
 
-		val, err := redis.String(rc.Get().Do("GET", "name"))
-
-		if err != nil {
-			c.String(http.StatusOK, "power by Redigo get err:"+err.Error())
-		}
-
-		c.String(http.StatusOK, "power by Redigo:"+val)
-	})
-
-	r.GET("/cluster", func(c *gin.Context) {
-		rc, err := OpenRedisCluster([]string{"192.168.139.139:7000"})
-
-		if err != nil {
-			c.String(http.StatusOK, "power by Redigo cluster err:"+err.Error())
-		}
-
-		val, err := redis.String(rc.Do("GET", "love"))
-
-		if err != nil {
-			c.String(http.StatusOK, "power by Redigo cluster get err:"+err.Error())
-		}
-
-		c.String(http.StatusOK, "power by Redigo cluster :"+val)
+		c.String(http.StatusOK, "power by Redigo cache :"+val)
 	})
 }

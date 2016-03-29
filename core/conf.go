@@ -9,13 +9,25 @@ var ConfigInfo *Conf
 
 //配置信息结构
 type Conf struct {
-	REDIS *Redis `yaml:"redis"`
-	MYSQL *Mysql `yaml:"mysql"`
+	REDIS        *Redis        `yaml:"redis"`
+	REDISCLUSTER *RedisCluster `yaml:"redis_cluster"`
+	MYSQL        *Mysql        `yaml:"mysql"`
+	IsCluster    bool          `yaml:"iscluster"`
 }
 
 type Redis struct {
-	Addrs     string `yaml:"addrs"`
-	IsCluster bool   `yaml:"iscluster"`
+	Addrs       string `yaml:"addrs"`
+	MaxIdle     int    `yaml:"max_idle"`
+	IdleTimeout int    `yaml:"idle_timeout"`
+}
+
+type RedisCluster struct {
+	Addrs        string `yaml:"addrs"`
+	KeepAlive    int    `yaml:"keep_alive"`
+	AliveTime    int    `yaml:"alive_time"`
+	ConnTimeout  int    `yaml:"conn_timeout"`
+	ReadTimeout  int    `yaml:"read_timeout"`
+	WriteTimeout int    `yaml:"write_timeout"`
 }
 
 type Mysql struct {
@@ -28,6 +40,10 @@ type Mysql struct {
 
 func (c *Conf) GetRedisConfig() *Redis {
 	return c.REDIS
+}
+
+func (c *Conf) GetRedisClusterConfig() *RedisCluster {
+	return c.REDISCLUSTER
 }
 
 func (c *Conf) GetMysqlConfig() *Mysql {
