@@ -8,20 +8,16 @@ import (
 
 func RegisterRoutes(r *gin.Engine) {
 	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "power by Gin")
+		c.String(http.StatusOK, "power by AKBS !")
 	})
 
 	r.GET("/cache", func(c *gin.Context) {
 		query := c.Query("query")
 		cache, err := NewRedisCache()
 		if err != nil {
-			c.String(http.StatusOK, "power by Redigo cache err:"+err.Error())
+			c.String(http.StatusServiceUnavailable, err.Error())
 		}
-		val, err := redis.String(cache.Do("GET", query))
-		if err != nil {
-			c.String(http.StatusOK, "power by Redigo cache get err:"+err.Error())
-		}
-
-		c.String(http.StatusOK, "power by Redigo cache :"+val)
+		val, _ := redis.String(cache.Do("GET", query))
+		c.String(http.StatusOK, "AKBS RESULTS :"+val)
 	})
 }

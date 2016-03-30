@@ -30,9 +30,9 @@ var configstring = `
         </filter>
     </outputs>
     <formats>
-        <format id="sended" format="%Date %Time [%Level] %Msg%n"/>
-        <format id="info" format="%Date %Time [%Level] %Msg%n"/>
-        <format id="error" format="%Date %Time [%Level] %Msg%n"/>
+        <format id="sended" format="[%Date %Time] [%Level] %Msg%n"/>
+        <format id="info" format="[%Date %Time] [%Level] %Msg%n"/>
+        <format id="error" format="[%Date %Time] [%Level] %Msg%n"/>
     </formats>
 </seelog>
 `
