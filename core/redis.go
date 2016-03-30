@@ -4,7 +4,6 @@ import (
 	"errors"
 	rc "github.com/chasex/redis-go-cluster"
 	"github.com/garyburd/redigo/redis"
-	"github.com/phillihq/akbs/logger"
 	"time"
 )
 
@@ -21,11 +20,9 @@ func NewRedisCache() (cache Cache, err error) {
 	isCluster := ConfigInfo.IsCluster //是否集群
 
 	if !isCluster {
-		logger.GetLogger().Println("<Redis单实例连接>")
 		addrs := ConfigInfo.GetRedisConfig().Addrs
 		cache, err = OpenRedis(addrs) //单实例连接
 	} else {
-		logger.GetLogger().Println("<Redis集群连接>")
 		addrs := ConfigInfo.GetRedisClusterConfig().Addrs
 		cache, err = OpenRedisCluster([]string{addrs}) //集群连接
 	}

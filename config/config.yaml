@@ -14,8 +14,8 @@ redis_cluster:
 iscluster : false
 
 mysql:
-    host: 127.0.0.1
+    host: 192.168.46.12
     port: 3306
-    user: sa
-    password: 123456
-    database: antelope
+    user: root
+    password: abc123
+    database: antelope_test

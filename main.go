@@ -6,6 +6,7 @@ import (
 	"github.com/phillihq/akbs/core"
 	"github.com/phillihq/akbs/logger"
 	mdw "github.com/phillihq/akbs/middleware"
+	router "github.com/phillihq/akbs/routes"
 	"runtime"
 )
 
@@ -43,7 +44,7 @@ func main() {
 	mdw.RegisterMiddlewares(r)
 
 	//注册路由
-	core.RegisterRoutes(r)
+	router.RegisterRoutes(r)
 
 	//运行web服务
 	go r.Run(":" + port)
