@@ -1,6 +1,6 @@
 # akbs
 
-基于gin的http-api服务框架 
+轻量级http web服务框架 
 
 
 #### Start using it
@@ -30,6 +30,10 @@
     
     若显示 "Power by akbs" 则程序运行正常
     ```
+    
+6. 支持
+    * [Redigo](https://github.com/braintree/manners): Redigo is a Go client for the Redis database.
+    * [Mysql](github.com/go-sql-driver/mysql): Go MySQL Driver is a lightweight and fast MySQL driver for Go's (golang) database/sql package
 
 
 
