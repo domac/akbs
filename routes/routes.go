@@ -13,4 +13,6 @@ func RegisterRoutes(r *gin.Engine) {
 	r.GET("/cache", handler.RedisConnHandler)
 
 	r.GET("/db", handler.MySQLConnHandler)
+
+	r.GET("/profile/:name", handler.ProfileHandler)
 }
