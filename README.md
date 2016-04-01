@@ -31,7 +31,18 @@
     若显示 "Power by akbs" 则程序运行正常
     ```
     
-6. 支持
+6. 性能情况查看
+    ```sh
+    访问 http://localhost:8080/profile/:name
+    
+    :name 参数说明
+        goroutinue
+        block
+        heap
+        threadcreate
+    ```
+    
+7. 支持
     * [Redigo](https://github.com/braintree/manners): Redigo is a Go client for the Redis database.
     * [Mysql](github.com/go-sql-driver/mysql): Go MySQL Driver is a lightweight and fast MySQL driver for Go's (golang) database/sql package
 
