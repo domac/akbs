@@ -10,9 +10,9 @@ func RegisterRoutes(r *gin.Engine) {
 	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "power by AKBS !")
 	})
-	r.GET("/cache", handler.RedisConnHandler)
+	r.GET("/cache", handler.RedisConnHandler) //测试redis
 
-	r.GET("/db", handler.MySQLConnHandler)
+	r.GET("/db", handler.MySQLConnHandler) //测试mysql
 
-	r.GET("/profile/:name", handler.ProfileHandler)
+	r.GET("/profile/:name", handler.ProfileHandler) //测试profile
 }

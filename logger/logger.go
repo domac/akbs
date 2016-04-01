@@ -18,15 +18,15 @@ var configstring = `
 <seelog minlevel="debug">
     <outputs>
         <filter levels="debug">
-            <rollingfile formatid="sended" type="date" filename="/apps/logs/akbs/ktse.log" datepattern="2006-01-02" />
+            <rollingfile formatid="sended" type="date" filename="/apps/logs/akbs/akbs.log" datepattern="2006-01-02" />
         </filter>
         <filter levels="info">
             <console formatid="info"/>
-            <rollingfile formatid="info" type="date" filename="/apps/logs/akbs/ktse.log"  datepattern="2006-01-02" />
+            <rollingfile formatid="info" type="date" filename="/apps/logs/akbs/akbs.log"  datepattern="2006-01-02" />
         </filter>
         <filter levels="warn,error,critical">
             <console formatid="error"/>
-            <rollingfile formatid="error" type="date" filename="/apps/logs/akbs/ktse_errors.log"  datepattern="2006-01-02" />
+            <rollingfile formatid="error" type="date" filename="/apps/logs/akbs/akbs_errors.log"  datepattern="2006-01-02" />
         </filter>
     </outputs>
     <formats>
