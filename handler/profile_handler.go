@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/phillihq/akbs/logger"
 	"net/http"
+	"runtime"
 	"runtime/pprof"
 )
 
@@ -23,6 +24,15 @@ func ProfileHandler(c *gin.Context) {
 		profile = pprof.Lookup("block")
 	case "threadcreate":
 		profile = pprof.Lookup("threadcreate")
+	case "mem":
+		var mem runtime.MemStats
+		runtime.ReadMemStats(&mem)
+		c.JSON(http.StatusOK, gin.H{
+			"mem alloc":       mem.Alloc,
+			"mem total alloc": mem.TotalAlloc,
+			"mem heap alloc":  mem.HeapAlloc,
+			"mem heap sys":    mem.HeapSys,
+		})
 	default:
 		logger.GetLogger().Warnln("no cmd")
 	}
