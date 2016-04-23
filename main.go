@@ -46,10 +46,13 @@ func main() {
 	//注册路由
 	router.RegisterRoutes(r)
 
-	//运行web服务
-	go r.Run(":" + port)
+	//用于演示
+	r.Run(":" + port)
+	select {}
 
+	//用于正常运行web服务
+	//go r.Run(":" + port)
 	//信号处理
-	signalCH := core.InitSignal()
-	core.HandleSignal(signalCH)
+	//signalCH := core.InitSignal()
+	//core.HandleSignal(signalCH)
 }
