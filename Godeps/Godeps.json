@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/phillihq/akbs",
-	"GoVersion": "go1.5",
+	"GoVersion": "go1.7",
 	"GodepVersion": "v60",
 	"Deps": [
 		{
