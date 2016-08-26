@@ -15,4 +15,6 @@ func RegisterRoutes(r *gin.Engine) {
 	r.GET("/db", handler.MySQLConnHandler) //测试mysql
 
 	r.GET("/profile/:name", handler.ProfileHandler) //测试profile
+
+	r.POST("/convert", handler.ConvertHandler)
 }
